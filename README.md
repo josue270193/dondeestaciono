@@ -7,3 +7,5 @@ Se requiere de Java 11+ y Gradle 3.0+ para su compilacion y ejecucion
  
  `gradlew build`
  
+## Agradecimientos
+A todos
