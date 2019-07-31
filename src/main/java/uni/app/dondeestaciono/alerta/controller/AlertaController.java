@@ -1,12 +1,12 @@
-package uni.app.dondeestaciono.controller;
+package uni.app.dondeestaciono.alerta.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import uni.app.dondeestaciono.model.Alerta;
-import uni.app.dondeestaciono.repository.AlertaRepository;
+import uni.app.dondeestaciono.alerta.model.Alerta;
+import uni.app.dondeestaciono.alerta.repository.AlertaRepository;
 
 @RestController
 @RequestMapping("/alerta")

@@ -1,4 +1,4 @@
-package uni.app.dondeestaciono.model;
+package uni.app.dondeestaciono.alerta.model;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
