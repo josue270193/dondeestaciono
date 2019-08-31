@@ -1,6 +1,7 @@
 buildscript {
     ext {
         springBootVersion = '2.1.6.RELEASE'
+        springfoxSwaggerVersion = '2.9.2'
     }
     repositories {
         mavenCentral()
@@ -36,10 +37,15 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive'
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
+//    implementation "io.springfox:springfox-swagger2:${springfoxSwaggerVersion}"
+//    implementation "io.springfox:springfox-swagger-ui:${springfoxSwaggerVersion}"
+
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     annotationProcessor 'org.projectlombok:lombok'
+
+    // TEST DEPENDENCIES
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'io.projectreactor:reactor-test'
 }
