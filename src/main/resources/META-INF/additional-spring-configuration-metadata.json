@@ -1,0 +1,14 @@
+{
+  "properties": [
+    {
+      "name": "google.json-path",
+      "type": "java.lang.String",
+      "description": "Path del Json para el OAuth2.0."
+    },
+    {
+      "name": "google.firebase-url",
+      "type": "java.lang.String",
+      "description": "Url de Firebase."
+    }
+  ]
+}

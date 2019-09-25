@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import uni.app.dondeestaciono.ruta.model.Ruta;
+import uni.app.dondeestaciono.ruta.model.RutaDto;
 import uni.app.dondeestaciono.ruta.repository.RutaRepository;
 
 @RestController
@@ -26,20 +26,20 @@ public class RutaController {
   }
 
   @GetMapping("/")
-  public Flux<Ruta> getAll() {
+  public Flux<RutaDto> getAll() {
     LOGGER.debug("getAll");
     return rutaRepository.findAll().log();
   }
 
   @GetMapping("/{id_ruta}")
-  public Mono<Ruta> getOne(@PathVariable(name = "id_ruta") String id) {
-    LOGGER.debug("getOne - " + id);
+  public Mono<RutaDto> getOne(@PathVariable(name = "id_ruta") String id) {
+    LOGGER.debug("getOne {}", id);
     return rutaRepository.findById(id).log();
   }
 
   @PostMapping("/")
-  public Mono<Ruta> insertOne(@RequestBody Ruta ruta) {
-    LOGGER.debug("insertOne - " + ruta);
+  public Mono<RutaDto> insertOne(@RequestBody RutaDto ruta) {
+    LOGGER.debug("insertOne {}", ruta);
     return rutaRepository.save(ruta).log();
   }
 }

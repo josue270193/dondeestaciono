@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
 @Data
-public class Ruta {
+public class RutaDto {
 
   @Id private String id;
   private String nombre;

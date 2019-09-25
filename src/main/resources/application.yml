@@ -1,8 +1,15 @@
 logging:
   level:
-    ROOT: INFO
-    uni.app.dondeestaciono: DEBUG
+    ROOT: WARN
+    uni.app.dondeestaciono: WARN
 spring:
   data:
     mongodb:
       database: dondeestaciono
+server:
+  error:
+    whitelabel:
+      enabled: false
+google:
+  firebase-url: https://dondeestaciono-2350.firebaseio.com
+  json-path: C:\\Users\\josue\\donde_estaciono-firebase.json

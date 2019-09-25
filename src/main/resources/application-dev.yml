@@ -1,0 +1,12 @@
+logging:
+  level:
+    ROOT: INFO
+    uni.app.dondeestaciono: DEBUG
+spring:
+  data:
+    mongodb:
+      database: dondeestaciono
+server:
+  error:
+    whitelabel:
+      enabled: true

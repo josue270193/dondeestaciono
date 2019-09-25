@@ -1,7 +1,8 @@
 buildscript {
     ext {
-        springBootVersion = '2.1.6.RELEASE'
-        springfoxSwaggerVersion = '2.9.2'
+        firebaseVersion = '6.10.0'
+        springBootVersion = '2.1.8.RELEASE'
+        springfoxSwaggerVersion = '3.0.0-SNAPSHOT'
     }
     repositories {
         mavenCentral()
@@ -31,14 +32,17 @@ configurations {
 
 repositories {
     mavenCentral()
+    maven { url 'http://oss.jfrog.org/artifactory/oss-snapshot-local/' }
 }
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive'
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
-//    implementation "io.springfox:springfox-swagger2:${springfoxSwaggerVersion}"
-//    implementation "io.springfox:springfox-swagger-ui:${springfoxSwaggerVersion}"
+    implementation "io.springfox:springfox-swagger2:${springfoxSwaggerVersion}"
+    implementation "io.springfox:springfox-spring-webflux:${springfoxSwaggerVersion}"
+    implementation "io.springfox:springfox-swagger-ui:${springfoxSwaggerVersion}"
+    implementation "com.google.firebase:firebase-admin:${firebaseVersion}"
 
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'

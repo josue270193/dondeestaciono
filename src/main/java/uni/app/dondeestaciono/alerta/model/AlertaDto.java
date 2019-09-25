@@ -6,7 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
 @Data
-public class Alerta {
+public class AlertaDto {
 
 	@Id
 	private String id;
