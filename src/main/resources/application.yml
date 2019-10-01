@@ -6,6 +6,7 @@ spring:
   data:
     mongodb:
       database: dondeestaciono
+      field-naming-strategy: org.springframework.data.mapping.model.SnakeCaseFieldNamingStrategy
   jackson:
     property-naming-strategy: SNAKE_CASE
 server:
