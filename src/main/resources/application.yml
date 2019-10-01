@@ -6,6 +6,8 @@ spring:
   data:
     mongodb:
       database: dondeestaciono
+  jackson:
+    property-naming-strategy: SNAKE_CASE
 server:
   error:
     whitelabel:

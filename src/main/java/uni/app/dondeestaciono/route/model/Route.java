@@ -1,4 +1,4 @@
-package uni.app.dondeestaciono.ruta.model;
+package uni.app.dondeestaciono.route.model;
 
 import java.util.List;
 import lombok.Data;
@@ -7,10 +7,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
 @Data
-public class RutaDto {
+public class Route {
 
   @Id private String id;
-  private String nombre;
-  private List<LatLng> puntos;
-  private LineaEstilo linea;
+  private String name;
+  private List<LatLng> points;
+  private LineStyle lineStyle;
 }

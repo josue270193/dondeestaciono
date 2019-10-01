@@ -1,9 +1,9 @@
-package uni.app.dondeestaciono.ruta.model;
+package uni.app.dondeestaciono.route.model;
 
 import lombok.Data;
 
 @Data
-public class LineaEstilo {
+public class LineStyle {
 
   private String color;
   private Float ancho;
