@@ -64,7 +64,7 @@ public class ApiCabaService {
   }
 
   public Flux<RouteDto> getTransporteApi(Double latitude, Double longitude) {
-    MultiValueMap<String, String> params = getMapTransporte(latitude, longitude, "json");
+    MultiValueMap<String, String> params = getMapTransporte(latitude, longitude, "json", false);
 
     return this.webClient
         .get()
@@ -97,8 +97,7 @@ public class ApiCabaService {
               RouteDto routeDto = new RouteDto();
               BeanUtils.copyProperties(routeSaved, routeDto);
               return routeDto;
-            })
-    ;
+            });
   }
 
   private Mono<?> obtenerTransporteData(Double latitude, Double longitude) {
@@ -116,8 +115,8 @@ public class ApiCabaService {
         .bodyToMono(EstacionamientoDto.class);
   }
 
-  private MultiValueMap<String, String> getMapTransporte(Double latitude, Double longitude,
-      String formato, Boolean isFullInfo) {
+  private MultiValueMap<String, String> getMapTransporte(
+      Double latitude, Double longitude, String formato, Boolean isFullInfo) {
     paramTransporte.set("x", longitude.toString());
     paramTransporte.set("y", latitude.toString());
     paramTransporte.set("formato", formato);
