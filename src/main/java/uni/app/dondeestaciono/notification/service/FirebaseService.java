@@ -1,4 +1,4 @@
-package uni.app.dondeestaciono.util;
+package uni.app.dondeestaciono.notification.service;
 
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;
@@ -12,11 +12,11 @@ import java.io.FileInputStream;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
+import uni.app.dondeestaciono.config.property.FirebaseProperties;
 import uni.app.dondeestaciono.notification.model.dto.PhoneMessageDto;
 
 @Service
@@ -25,19 +25,19 @@ public class FirebaseService {
   private static final Logger LOGGER = LoggerFactory.getLogger(FirebaseService.class);
   private static final String MESSAGE_TAG = "message";
 
-  @Value("${google.json-path}")
-  private String googleJsonPath;
+  private final FirebaseProperties firebaseProperties;
 
-  @Value("${google.firebase-url}")
-  private String googleFirebaseUrl;
+  public FirebaseService(FirebaseProperties firebaseProperties) {
+    this.firebaseProperties = firebaseProperties;
+  }
 
   @EventListener(ApplicationReadyEvent.class)
   public void configuration() {
-    try (FileInputStream serviceAccount = new FileInputStream(googleJsonPath)) {
+    try (FileInputStream serviceAccount = new FileInputStream(firebaseProperties.getJsonPath())) {
       FirebaseOptions options =
           new FirebaseOptions.Builder()
               .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-              .setDatabaseUrl(googleFirebaseUrl)
+              .setDatabaseUrl(firebaseProperties.getUrl())
               .build();
 
       FirebaseApp.initializeApp(options);

@@ -2,6 +2,7 @@ logging:
   level:
     ROOT: INFO
     uni.app.dondeestaciono: DEBUG
+    org.springframework.web.reactive.function.client.ExchangeFunctions: TRACE
 spring:
   data:
     mongodb:

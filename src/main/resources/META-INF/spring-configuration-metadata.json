@@ -1,0 +1,54 @@
+{
+  "groups": [
+    {
+      "name": "caba",
+      "type": "uni.app.dondeestaciono.config.property.CabaProperties",
+      "sourceType": "uni.app.dondeestaciono.config.property.CabaProperties"
+    },
+    {
+      "name": "firebase",
+      "type": "uni.app.dondeestaciono.config.property.FirebaseProperties",
+      "sourceType": "uni.app.dondeestaciono.config.property.FirebaseProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "firebase.url",
+      "type": "java.lang.String",
+      "description": "Url de Firebase.",
+      "sourceType": "uni.app.dondeestaciono.config.property.FirebaseProperties"
+    },
+    {
+      "name": "firebase.json-path",
+      "type": "java.lang.String",
+      "description": "Path del Json para el OAuth2.0.",
+      "sourceType": "uni.app.dondeestaciono.config.property.FirebaseProperties"
+    },
+    {
+      "name": "caba.url-base",
+      "type": "java.lang.String",
+      "description": "Url base del endpoint de la API del gobierno de la ciudad.",
+      "sourceType": "uni.app.dondeestaciono.config.property.CabaProperties"
+    },
+    {
+      "name": "caba.client-id",
+      "type": "java.lang.String",
+      "description": "Id del Cliente para la API de Transporte de CABA.",
+      "sourceType": "uni.app.dondeestaciono.config.property.CabaProperties"
+    },
+    {
+      "name": "caba.client-secret",
+      "type": "java.lang.String",
+      "description": "Secreto del cliente para la API de Transporte de CABA.",
+      "sourceType": "uni.app.dondeestaciono.config.property.CabaProperties"
+    },
+    {
+      "name": "caba.urls.estacionamientos",
+      "type": "java.lang.String",
+      "description": "Url del endpoint para los estacionamientos.",
+      "sourceType": "uni.app.dondeestaciono.config.property.CabaProperties"
+    }
+  ],
+  "hints": [
+  ]
+}

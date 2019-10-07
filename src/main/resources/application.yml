@@ -3,6 +3,8 @@ logging:
     ROOT: WARN
     uni.app.dondeestaciono: WARN
 spring:
+  http:
+    log-request-details: true
   data:
     mongodb:
       database: dondeestaciono
@@ -13,6 +15,12 @@ server:
   error:
     whitelabel:
       enabled: false
-google:
-  firebase-url: https://dondeestaciono-2350.firebaseio.com
+firebase:
+  url: https://dondeestaciono-2350.firebaseio.com
   json-path: C:\\Users\\josue\\donde_estaciono-firebase.json
+caba:
+  client-id: ea5817e7b2ea4e12a8215ba1fad5d1aa
+  client-secret: 50E7086F90cF485ebFF1cB2736e9c606
+  url-base: https://apitransporte.buenosaires.gob.ar
+  urls:
+    estacionamientos: /transito/v1/estacionamientos

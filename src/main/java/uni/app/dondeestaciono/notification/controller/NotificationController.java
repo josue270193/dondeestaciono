@@ -15,7 +15,7 @@ import uni.app.dondeestaciono.notification.model.PhoneRegistration;
 import uni.app.dondeestaciono.notification.model.dto.PhoneMessageDto;
 import uni.app.dondeestaciono.notification.model.dto.PhoneRegistrationDto;
 import uni.app.dondeestaciono.notification.repository.NotificationRepository;
-import uni.app.dondeestaciono.util.FirebaseService;
+import uni.app.dondeestaciono.notification.service.FirebaseService;
 
 @RestController
 @RequestMapping("/notification")
