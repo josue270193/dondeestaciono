@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeanUtils;
 import org.springframework.http.MediaType;
 import org.springframework.http.codec.json.Jackson2JsonDecoder;
 import org.springframework.http.codec.json.Jackson2JsonEncoder;
@@ -15,11 +14,12 @@ import org.springframework.web.reactive.function.client.ExchangeStrategies;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClient.Builder;
 import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
 import uni.app.dondeestaciono.config.property.CabaProperties;
+import uni.app.dondeestaciono.route.model.Point;
 import uni.app.dondeestaciono.route.model.Route;
-import uni.app.dondeestaciono.route.model.dto.RouteDto;
-import uni.app.dondeestaciono.route.model.dto.caba.EstacionamientoDto;
+import uni.app.dondeestaciono.route.model.caba.EstacionamientoDto;
+import uni.app.dondeestaciono.route.model.caba.EstacionamientoGeoDto;
+import uni.app.dondeestaciono.route.model.caba.EstacionamientoGeoFeatureDto;
 import uni.app.dondeestaciono.route.repository.RouteRepository;
 
 @Service
@@ -63,8 +63,12 @@ public class ApiCabaService {
     paramTransporte.add("client_secret", cabaProperties.getClientSecret());
   }
 
-  public Flux<RouteDto> getTransporteApi(Double latitude, Double longitude) {
-    MultiValueMap<String, String> params = getMapTransporte(latitude, longitude, "json", false);
+  public Flux<Route> getTransporteApi(Double latitude, Double longitude) {
+    return obtenerGeoData(latitude, longitude).thenMany(obtenerJsonData(latitude, longitude));
+  }
+
+  private Flux<Route> obtenerJsonData(Double latitude, Double longitude) {
+    MultiValueMap<String, String> params = getMapTransporte(latitude, longitude, "json", true);
 
     return this.webClient
         .get()
@@ -79,29 +83,13 @@ public class ApiCabaService {
         .flatMapIterable(EstacionamientoDto::getInstancias)
         .flatMap(
             instanciaDto -> {
-              LOGGER.info("instanciaDto: {}", instanciaDto);
-              return routeRepository
-                  .findById(instanciaDto.getId())
-                  .defaultIfEmpty(new Route())
-                  .flatMap(
-                      route -> {
-                        if (route.getId() == null) {
-                          return obtenerTransporteData(latitude, longitude);
-                        }
-                        return Mono.just(route);
-                      })
-                  .flux();
-            })
-        .map(
-            routeSaved -> {
-              RouteDto routeDto = new RouteDto();
-              BeanUtils.copyProperties(routeSaved, routeDto);
-              return routeDto;
+              LOGGER.info("data: {}", instanciaDto);
+              return routeRepository.findById(instanciaDto.getId());
             });
   }
 
-  private Mono<?> obtenerTransporteData(Double latitude, Double longitude) {
-    MultiValueMap<String, String> params = getMapTransporte(latitude, longitude, "geojson", true);
+  private Flux<?> obtenerGeoData(Double latitude, Double longitude) {
+    MultiValueMap<String, String> params = getMapTransporte(latitude, longitude, "geojson");
 
     return this.webClient
         .get()
@@ -112,7 +100,36 @@ public class ApiCabaService {
                     .queryParams(params)
                     .build())
         .retrieve()
-        .bodyToMono(EstacionamientoDto.class);
+        .bodyToMono(EstacionamientoGeoDto.class)
+        .flatMapIterable(EstacionamientoGeoDto::getFeatures)
+        .filterWhen(
+            featureDto -> routeRepository.existsById(featureDto.getId()).map(existed -> !existed))
+        .map(this::createRoute)
+        .flatMap(routeRepository::save);
+  }
+
+  private Route createRoute(EstacionamientoGeoFeatureDto featureDto) {
+    Route route = new Route();
+    route.setId(featureDto.getId());
+    featureDto
+        .getGeometry()
+        .getCoordinates()
+        .forEach(
+            lista1 ->
+                lista1.forEach(
+                    lista2 -> {
+                      Point point = new Point();
+                      lista2.forEach(
+                          valorDouble -> {
+                            if (point.getLongitude() == null) {
+                              point.setLongitude(valorDouble);
+                            } else {
+                              point.setLatitude(valorDouble);
+                            }
+                          });
+                      route.getPoints().add(point);
+                    }));
+    return route;
   }
 
   private MultiValueMap<String, String> getMapTransporte(
@@ -120,7 +137,7 @@ public class ApiCabaService {
     paramTransporte.set("x", longitude.toString());
     paramTransporte.set("y", latitude.toString());
     paramTransporte.set("formato", formato);
-    paramTransporte.add("fullInfo", isFullInfo.toString());
+    paramTransporte.set("fullInfo", isFullInfo.toString());
     return paramTransporte;
   }
 

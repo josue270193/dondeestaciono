@@ -1,4 +1,4 @@
-package uni.app.dondeestaciono.route.model.dto.caba;
+package uni.app.dondeestaciono.route.model.caba;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Data;

@@ -5,7 +5,7 @@ import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import java.io.IOException;
-import uni.app.dondeestaciono.route.model.dto.caba.EstacionamientoInstanciaContenidoDto;
+import uni.app.dondeestaciono.route.model.caba.EstacionamientoInstanciaContenidoDto;
 
 public class EstacionamientoInstanciaContenidoDeserializer
     extends JsonDeserializer<EstacionamientoInstanciaContenidoDto> {

@@ -1,9 +1,9 @@
-package uni.app.dondeestaciono.route.model.dto;
+package uni.app.dondeestaciono.route.model;
 
 import lombok.Data;
 
 @Data
-public class PointDto {
+public class Point {
 
   private Double longitude;
   private Double latitude;
