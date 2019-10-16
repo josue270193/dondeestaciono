@@ -1,5 +1,7 @@
 package uni.app.dondeestaciono.route.controller;
 
+import java.time.LocalDate;
+import java.time.ZoneOffset;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -12,9 +14,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import uni.app.dondeestaciono.route.model.BlockRoute;
 import uni.app.dondeestaciono.route.model.Route;
+import uni.app.dondeestaciono.route.repository.BlockRouteRepository;
 import uni.app.dondeestaciono.route.repository.RouteRepository;
 import uni.app.dondeestaciono.route.service.ApiCabaService;
+import uni.app.dondeestaciono.route.service.RouteService;
+import uni.app.dondeestaciono.route.service.TwitterService;
 
 @RestController
 @RequestMapping("/route")
@@ -22,12 +28,23 @@ public class RouteController {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(RouteController.class);
 
+  private final BlockRouteRepository blockRouteRepository;
   private final RouteRepository routeRepository;
+  private final RouteService routeService;
   private final ApiCabaService apiCabaService;
+  private final TwitterService twitterService;
 
-  public RouteController(RouteRepository routeRepository, ApiCabaService apiCabaService) {
+  public RouteController(
+      BlockRouteRepository blockRouteRepository,
+      RouteRepository routeRepository,
+      RouteService routeService,
+      ApiCabaService apiCabaService,
+      TwitterService twitterService) {
+    this.blockRouteRepository = blockRouteRepository;
     this.routeRepository = routeRepository;
+    this.routeService = routeService;
     this.apiCabaService = apiCabaService;
+    this.twitterService = twitterService;
   }
 
   @GetMapping("/")
@@ -55,10 +72,28 @@ public class RouteController {
   }
 
   @GetMapping("/filter")
-  public Flux<Route> getByPosition(
-      @RequestParam(name = "latitude") Double latitude,
-      @RequestParam(name = "longitude") Double longitude) {
+  public Flux<Route> getByPosition(@RequestParam Double latitude, @RequestParam Double longitude) {
     LOGGER.debug("getByPosition latitude: {} longitude: {}", latitude, longitude);
-    return apiCabaService.getTransporteApi(latitude, longitude);
+    return apiCabaService.getEstacionamientoApi(latitude, longitude);
+  }
+
+  @GetMapping("/filterByRadius")
+  public Flux<Route> getByPositionRadius(
+      @RequestParam Double latitude, @RequestParam Double longitude, @RequestParam Double radius) {
+    LOGGER.debug(
+        "getByPositionRadius latitude: {} longitude: {} radius: {}", latitude, longitude, radius);
+
+    return routeService.getByPositionAndRadius(latitude, longitude, radius);
+  }
+
+  @GetMapping("/block")
+  public Flux<BlockRoute> getBlocksByDay() {
+    return blockRouteRepository.findByStartedGreaterThanEqualAndFinishedNull(
+        LocalDate.now().atStartOfDay().atOffset(ZoneOffset.UTC));
+  }
+
+  @GetMapping("/tweetBlock")
+  public Flux retrieveBlock() {
+    return twitterService.getTweetBlockRoute();
   }
 }

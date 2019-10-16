@@ -9,6 +9,11 @@
       "name": "firebase",
       "type": "uni.app.dondeestaciono.config.property.FirebaseProperties",
       "sourceType": "uni.app.dondeestaciono.config.property.FirebaseProperties"
+    },
+    {
+      "name": "twitter",
+      "type": "uni.app.dondeestaciono.config.property.FirebaseProperties",
+      "sourceType": "uni.app.dondeestaciono.config.property.FirebaseProperties"
     }
   ],
   "properties": [
@@ -46,6 +51,48 @@
       "name": "caba.urls.estacionamientos",
       "type": "java.lang.String",
       "description": "Url del endpoint para los estacionamientos.",
+      "sourceType": "uni.app.dondeestaciono.config.property.CabaProperties"
+    },
+    {
+      "name": "twitter.debug",
+      "type": "java.lang.Boolean",
+      "description": "Si esta habilitado el modo debug de Twitter4J",
+      "sourceType": "uni.app.dondeestaciono.config.property.TwitterProperties"
+    },
+    {
+      "name": "twitter.consumerKey",
+      "type": "java.lang.StringBuilder",
+      "description": "consumerKey Necesario para la API de Twitter",
+      "sourceType": "uni.app.dondeestaciono.config.property.TwitterProperties"
+    },
+    {
+      "name": "twitter.consumerSecret",
+      "type": "java.lang.StringBuilder",
+      "description": "consumerSecret Necesario para la API de Twitter",
+      "sourceType": "uni.app.dondeestaciono.config.property.TwitterProperties"
+    },
+    {
+      "name": "twitter.accessToken",
+      "type": "java.lang.StringBuilder",
+      "description": "accessToken Necesario para la API de Twitter",
+      "sourceType": "uni.app.dondeestaciono.config.property.TwitterProperties"
+    },
+    {
+      "name": "twitter.accessTokenSecret",
+      "type": "java.lang.StringBuilder",
+      "description": "accessTokenSecret Necesario para la API de Twitter",
+      "sourceType": "uni.app.dondeestaciono.config.property.TwitterProperties"
+    },
+    {
+      "name": "caba.url-base-normalizador",
+      "type": "java.lang.String",
+      "description": "Url base del endpoint para la normalizacion de las calles.",
+      "sourceType": "uni.app.dondeestaciono.config.property.CabaProperties"
+    },
+    {
+      "name": "caba.urls.normalizador",
+      "type": "java.lang.String",
+      "description": "Url del endpoint para la normalizacion de las calles.",
       "sourceType": "uni.app.dondeestaciono.config.property.CabaProperties"
     }
   ],

@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import uni.app.dondeestaciono.route.model.caba.EstacionamientoGeoFeatureGeometry;
 
 @Document
 @Data
@@ -13,7 +14,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Route {
 
   @Id private String id;
+  private RouteSchedule schedule;
   private List<Point> points = new ArrayList<>();
-
-
+  private EstacionamientoGeoFeatureGeometry geometry;
 }

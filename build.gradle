@@ -1,11 +1,14 @@
 buildscript {
     ext {
         firebaseVersion = '6.10.0'
-        springBootVersion = '2.1.8.RELEASE'
+        springBootVersion = '2.2.0.RC1'
         springfoxSwaggerVersion = '3.0.0-SNAPSHOT'
+        twitter4jVersion = '4.0.7'
     }
     repositories {
         mavenCentral()
+        maven { url 'https://repo.spring.io/milestone' }
+        maven { url 'https://repo.spring.io/snapshot' }
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion")
@@ -32,6 +35,8 @@ configurations {
 
 repositories {
     mavenCentral()
+    maven { url 'https://repo.spring.io/milestone' }
+    maven { url 'https://repo.spring.io/snapshot' }
     maven { url 'http://oss.jfrog.org/artifactory/oss-snapshot-local/' }
 }
 
@@ -43,6 +48,7 @@ dependencies {
     implementation "io.springfox:springfox-spring-webflux:${springfoxSwaggerVersion}"
     implementation "io.springfox:springfox-swagger-ui:${springfoxSwaggerVersion}"
     implementation "com.google.firebase:firebase-admin:${firebaseVersion}"
+    implementation "org.twitter4j:twitter4j-core:${twitter4jVersion}"
 
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'

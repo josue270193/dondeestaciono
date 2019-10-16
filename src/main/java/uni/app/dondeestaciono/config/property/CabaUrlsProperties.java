@@ -8,5 +8,7 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "caba.urls", ignoreInvalidFields = true)
 @Data
 public class CabaUrlsProperties {
+
   private String estacionamientos;
+  private String normalizador;
 }

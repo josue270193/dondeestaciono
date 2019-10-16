@@ -12,5 +12,6 @@ public class CabaProperties {
   private String clientId;
   private String clientSecret;
   private String urlBase;
+  private String urlBaseNormalizador;
   private CabaUrlsProperties urls;
 }

@@ -39,8 +39,9 @@ public class FirebaseService {
               .setCredentials(GoogleCredentials.fromStream(serviceAccount))
               .setDatabaseUrl(firebaseProperties.getUrl())
               .build();
-
-      FirebaseApp.initializeApp(options);
+      if (FirebaseApp.getApps().isEmpty()) {
+        FirebaseApp.initializeApp(options);
+      }
     } catch (Exception e) {
       LOGGER.error("Error al configurar Firebase", e);
     }
