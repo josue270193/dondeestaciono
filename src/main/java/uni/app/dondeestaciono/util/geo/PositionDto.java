@@ -47,9 +47,7 @@ public class PositionDto implements Serializable {
     if (position != null) {
       double[] copyNumbers = position.getNumbers();
       this.numbers = new double[copyNumbers.length];
-      for (int i = 0; i < copyNumbers.length; i++) {
-        this.numbers[i] = copyNumbers[i];
-      }
+      System.arraycopy(copyNumbers, 0, this.numbers, 0, copyNumbers.length);
     }
   }
 

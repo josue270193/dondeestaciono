@@ -24,10 +24,10 @@ public class ApiNormalizadorService {
   private static final Logger LOGGER = LoggerFactory.getLogger(ApiNormalizadorService.class);
   private static final String PARAMETRO_DIRECCION = "direccion";
   private static final String PARTIDO_CABA = ",caba";
+  private static final String PARAMETRO_GEOCODIFICAR = "geocodificar";
 
   private final WebClient webClient;
   private final CabaProperties cabaProperties;
-  private MultiValueMap<String, String> param;
 
   public ApiNormalizadorService(Builder webClient, CabaProperties cabaProperties) {
 
@@ -78,8 +78,9 @@ public class ApiNormalizadorService {
   }
 
   private MultiValueMap<String, String> getParam(String direccion) {
-    param = new LinkedMultiValueMap<>();
+    MultiValueMap<String, String> param = new LinkedMultiValueMap<>();
     param.set(PARAMETRO_DIRECCION, direccion.concat(PARTIDO_CABA));
+    param.set(PARAMETRO_GEOCODIFICAR, "true");
     return param;
   }
 }

@@ -10,7 +10,7 @@ public class PolygonDto extends GeometryDto {
 
   @Override
   public GeoJSONObjectTypeEnum getGeoJSONObjectType() {
-    return GeoJSONObjectTypeEnum.Polygon;
+    return GeoJSONObjectTypeEnum.POLYGON;
   }
 
   public List<LineStringDto> getLinearRings() {

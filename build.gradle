@@ -1,7 +1,7 @@
 buildscript {
     ext {
         firebaseVersion = '6.10.0'
-        springBootVersion = '2.2.0.RC1'
+        springBootVersion = '2.2.0.RELEASE'
         springfoxSwaggerVersion = '3.0.0-SNAPSHOT'
         twitter4jVersion = '4.0.7'
     }

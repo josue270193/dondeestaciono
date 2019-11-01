@@ -29,7 +29,7 @@ public class PolygonBuilder extends GeometryBuilder<PolygonDto> {
 		checkAndCorrectLinearRing(polygon);
 
 		StringBuilder builder = initializeBuilder();
-		buildTypePart(builder, GeoJSONObjectTypeEnum.Polygon);
+		buildTypePart(builder, GeoJSONObjectTypeEnum.POLYGON);
 
 		builder.append(BuilderConstants.COORDINATES_SPACE);
 		builder.append(BuilderConstants.OPEN_BRACKET);

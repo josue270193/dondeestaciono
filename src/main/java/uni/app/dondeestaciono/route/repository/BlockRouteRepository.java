@@ -10,5 +10,5 @@ public interface BlockRouteRepository extends ReactiveCrudRepository<BlockRoute,
 
   Mono<BlockRoute> findByTweetDataId(String id);
 
-  Flux<BlockRoute> findByStartedGreaterThanEqualAndFinishedNull(OffsetDateTime dateTime);
+  Flux<BlockRoute> findByStartedGreaterThanEqualAndPointIsNotNull(OffsetDateTime dateTime);
 }

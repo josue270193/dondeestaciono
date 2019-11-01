@@ -28,6 +28,6 @@ public class LineStringDto extends GeometryDto {
 
   @Override
   public GeoJSONObjectTypeEnum getGeoJSONObjectType() {
-    return GeoJSONObjectTypeEnum.LineString;
+    return GeoJSONObjectTypeEnum.LINE_STRING;
   }
 }

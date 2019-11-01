@@ -80,6 +80,6 @@ public class PointDto extends GeometryDto {
 
   @Override
   public GeoJSONObjectTypeEnum getGeoJSONObjectType() {
-    return GeoJSONObjectTypeEnum.Point;
+    return GeoJSONObjectTypeEnum.POINT;
   }
 }

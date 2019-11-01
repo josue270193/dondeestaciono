@@ -1,6 +1,7 @@
 package uni.app.dondeestaciono.util.geo;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class UltimateGeoJSONFactory {
@@ -15,11 +16,8 @@ public class UltimateGeoJSONFactory {
 
   public LineStringDto createLineString(PositionDto... positions) {
     LineStringDto lineString = new LineStringDto();
-    List<PositionDto> lineStringPositions = new ArrayList<>();
 
-    for (PositionDto positionDto : positions) {
-      lineStringPositions.add(positionDto);
-    }
+    List<PositionDto> lineStringPositions = new ArrayList<>(Arrays.asList(positions));
     lineString.setPositions(lineStringPositions);
 
     return lineString;

@@ -1,9 +1,9 @@
 package uni.app.dondeestaciono.util.geo;
 
 public enum GeoJSONObjectTypeEnum {
-  Point(PointDto.class),
-  LineString(LineStringDto.class),
-  Polygon(PolygonDto.class);
+  POINT(PointDto.class),
+  LINE_STRING(LineStringDto.class),
+  POLYGON(PolygonDto.class);
 
   private final Class dtoClass;
 

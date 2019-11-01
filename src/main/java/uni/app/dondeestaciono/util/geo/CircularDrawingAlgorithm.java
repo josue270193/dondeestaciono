@@ -19,12 +19,6 @@ public class CircularDrawingAlgorithm implements ICircularDrawingAlgorithm {
     return instance;
   }
 
-  /*
-   * (non-Javadoc)
-   *
-   * @see org.ugeojson.math.draw.CircularDrawingAlgorithm#getCirclePoints(org.
-   * ugeojson.model.geometry.PointDto, double)
-   */
   @Override
   public List<PointDto> getCirclePoints(PointDto center, double radiusInMeters) {
     List<PointDto> circlePoints = new ArrayList<>();
@@ -40,12 +34,6 @@ public class CircularDrawingAlgorithm implements ICircularDrawingAlgorithm {
     return circlePoints;
   }
 
-  /*
-   * (non-Javadoc)
-   *
-   * @see org.ugeojson.math.draw.CircularDrawingAlgorithm#getArcPositions(org.
-   * ugeojson.model.PositionDto, double, double, double)
-   */
   @Override
   public List<PositionDto> getArcPositions(
       PositionDto center, double radiusInMeters, double startingAngle, double endingAngle) {
@@ -59,13 +47,6 @@ public class CircularDrawingAlgorithm implements ICircularDrawingAlgorithm {
     return arcPositions;
   }
 
-  /*
-   * (non-Javadoc)
-   *
-   * @see
-   * org.ugeojson.math.draw.CircularDrawingAlgorithm#getCirclePositions(org.
-   * ugeojson.model.PositionDto, double)
-   */
   @Override
   public List<PositionDto> getCirclePositions(PositionDto center, double radiusInMeters) {
     List<PositionDto> circlePoints = new ArrayList<>();

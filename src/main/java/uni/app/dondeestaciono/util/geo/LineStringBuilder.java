@@ -18,7 +18,7 @@ public class LineStringBuilder extends GeometryBuilder<LineStringDto> {
 		}
 
 		StringBuilder builder = initializeBuilder();
-		buildTypePart(builder, GeoJSONObjectTypeEnum.LineString);
+		buildTypePart(builder, GeoJSONObjectTypeEnum.LINE_STRING);
 
 		builder.append(BuilderConstants.COORDINATES_SPACE);
 		builder.append(BuilderConstants.OPEN_BRACKET);

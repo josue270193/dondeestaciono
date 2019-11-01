@@ -1,6 +1,7 @@
 package uni.app.dondeestaciono.route.controller;
 
 import java.time.LocalDate;
+import java.time.YearMonth;
 import java.time.ZoneOffset;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -88,8 +89,14 @@ public class RouteController {
 
   @GetMapping("/block")
   public Flux<BlockRoute> getBlocksByDay() {
-    return blockRouteRepository.findByStartedGreaterThanEqualAndFinishedNull(
+    return blockRouteRepository.findByStartedGreaterThanEqualAndPointIsNotNull(
         LocalDate.now().atStartOfDay().atOffset(ZoneOffset.UTC));
+  }
+
+  @GetMapping("/blockByMonth")
+  public Flux<BlockRoute> getBlocksByMonth() {
+    return blockRouteRepository.findByStartedGreaterThanEqualAndPointIsNotNull(
+        YearMonth.now().atDay(1).atStartOfDay().atOffset(ZoneOffset.UTC));
   }
 
   @GetMapping("/tweetBlock")

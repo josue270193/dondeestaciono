@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @AllArgsConstructor
-public enum RouteTypePermit {
+public enum EnumRoutePermit {
   PROHIBIDO_ESTACIONAR("PROHIBIDO ESTACIONAR"),
   PROHIBIDO_ESTACIONAR_DETENERSE("PROHIBIDO ESTACIONAR Y DETENERSE"),
   PERMITIDO_ESTACIONAR("PERMITIDO ESTACIONAR"),
@@ -13,10 +13,10 @@ public enum RouteTypePermit {
 
   @Getter private String value;
 
-  public static RouteTypePermit getByValue(String valueRoute) {
-    for (RouteTypePermit routeTypePermit : values()) {
-      if (routeTypePermit.getValue().compareToIgnoreCase(valueRoute) == 0) {
-        return routeTypePermit;
+  public static EnumRoutePermit getByValue(String valueRoute) {
+    for (EnumRoutePermit enumRoutePermit : values()) {
+      if (enumRoutePermit.getValue().compareToIgnoreCase(valueRoute) == 0) {
+        return enumRoutePermit;
       }
     }
     return null;

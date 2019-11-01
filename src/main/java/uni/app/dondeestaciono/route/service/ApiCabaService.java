@@ -26,9 +26,10 @@ import reactor.core.publisher.Mono;
 import uni.app.dondeestaciono.config.property.CabaProperties;
 import uni.app.dondeestaciono.route.model.Point;
 import uni.app.dondeestaciono.route.model.Route;
+import uni.app.dondeestaciono.route.model.RouteDetails;
 import uni.app.dondeestaciono.route.model.RouteSchedule;
 import uni.app.dondeestaciono.route.model.RouteScheduleDetail;
-import uni.app.dondeestaciono.route.model.RouteTypePermit;
+import uni.app.dondeestaciono.route.model.EnumRoutePermit;
 import uni.app.dondeestaciono.route.model.caba.EstacionamientoDto;
 import uni.app.dondeestaciono.route.model.caba.EstacionamientoGeoDto;
 import uni.app.dondeestaciono.route.model.caba.EstacionamientoGeoFeatureDto;
@@ -42,6 +43,8 @@ public class ApiCabaService {
   private static final Logger LOGGER = LoggerFactory.getLogger(ApiCabaService.class);
   private static final String PARAM_PERMISO = "permiso";
   private static final String PARAM_HORARIO = "horario";
+  private static final String PARAM_CALLE = "calle";
+  private static final String PARAM_ALTURA = "altura";
   private static final String VALOR_24_HORA = "24 HORAS";
   private static final String VALOR_HABILES_7_21 = "DÍAS HÁBILES DE 7 A 21 HORAS";
   private static final String SEPARADOR_WEEKDAY = ",";
@@ -49,7 +52,6 @@ public class ApiCabaService {
   private final WebClient webClient;
   private final CabaProperties cabaProperties;
   private final RouteRepository routeRepository;
-  private MultiValueMap<String, String> paramEstacionamiento;
 
   public ApiCabaService(
       Builder webClient, CabaProperties cabaProperties, RouteRepository routeRepository) {
@@ -129,10 +131,31 @@ public class ApiCabaService {
                     .map(
                         routeFilter -> {
                           routeFilter.setSchedule(createRouteSchedule(instanciaDto));
+                          routeFilter.setDetails(createRouteDetails(instanciaDto));
                           return routeFilter;
                         })
                     .flatMap(routeRepository::save)
                     .switchIfEmpty(Mono.just(route)));
+  }
+
+  private RouteDetails createRouteDetails(EstacionamientoInstanciaDto instanciaDto) {
+    RouteDetails routeDetails = new RouteDetails();
+    Map<String, String> mapa =
+        instanciaDto.getContenido().getContenido().stream()
+            .collect(
+                Collectors.toMap(
+                    EstacionamientoInstanciaContenidoDetalleDto::getNombreId,
+                    EstacionamientoInstanciaContenidoDetalleDto::getValor));
+
+    String valorAltura = mapa.get(PARAM_ALTURA);
+    String valorCalle = mapa.get(PARAM_CALLE);
+    String valorHorario = mapa.get(PARAM_HORARIO);
+
+    routeDetails.setAltura(valorAltura);
+    routeDetails.setCalle(valorCalle);
+    routeDetails.setHorario(valorHorario);
+
+    return routeDetails;
   }
 
   private RouteSchedule createRouteSchedule(EstacionamientoInstanciaDto instanciaDto) {
@@ -149,7 +172,7 @@ public class ApiCabaService {
 
     if (valorPermiso != null) {
       try {
-        routeSchedule.setPermit(RouteTypePermit.getByValue(valorPermiso));
+        routeSchedule.setPermit(EnumRoutePermit.getByValue(valorPermiso));
       } catch (IllegalArgumentException ex) {
         LOGGER.error(ex.getMessage());
       }
@@ -165,8 +188,6 @@ public class ApiCabaService {
         details = new ArrayList<>();
         details.add(
             createRouteScheduleDetail(getWeekdayWorkday(), getStartTime(), getEndTime(), false));
-        details.add(
-            createRouteScheduleDetail(getWeekdayWeekend(), getStartTime(), getEndTime(), true));
       }
       routeSchedule.setDetails(details);
     }
@@ -193,10 +214,6 @@ public class ApiCabaService {
         Calendar.FRIDAY,
         Calendar.SATURDAY,
         Calendar.SUNDAY);
-  }
-
-  private String getWeekdayWeekend() {
-    return getWeekday(Calendar.SATURDAY, Calendar.SUNDAY);
   }
 
   private String getWeekdayWorkday() {
@@ -278,7 +295,7 @@ public class ApiCabaService {
 
   private MultiValueMap<String, String> getParamEstacionamiento(
       Double latitude, Double longitude, String formato, Boolean isFullInfo) {
-    paramEstacionamiento = new LinkedMultiValueMap<>();
+    MultiValueMap<String, String> paramEstacionamiento = new LinkedMultiValueMap<>();
     paramEstacionamiento.add("radio", "100");
     paramEstacionamiento.add("client_id", cabaProperties.getClientId());
     paramEstacionamiento.add("client_secret", cabaProperties.getClientSecret());

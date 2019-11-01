@@ -10,8 +10,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.mongo.MongoProperties;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
@@ -23,7 +21,6 @@ import uni.app.dondeestaciono.util.geo.PositionDto;
 @Service
 public class RouteService {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(RouteService.class);
   private static final String COLLECTION_ROUTE = "route";
   private static final String FIELD_GEOMETRY = "geometry";
 

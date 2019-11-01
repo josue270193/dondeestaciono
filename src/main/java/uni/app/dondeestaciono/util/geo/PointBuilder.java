@@ -25,7 +25,7 @@ public class PointBuilder extends GeometryBuilder<PointDto> {
 		}
 
 		StringBuilder builder = initializeBuilder();
-		buildTypePart(builder, GeoJSONObjectTypeEnum.Point);
+		buildTypePart(builder, GeoJSONObjectTypeEnum.POINT);
 
 		builder.append(BuilderConstants.COORDINATES_SPACE);
 		builder.append(PositionBuilder.getInstance().position(point.getPosition()));

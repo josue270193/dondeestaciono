@@ -16,6 +16,7 @@ public class BlockRoute {
   private OffsetDateTime started;
   private OffsetDateTime finished;
   private String direction;
-  private String type;
+  private EnumBlockType type;
+  private Boolean isTotal;
   private Point point;
 }
