@@ -15,9 +15,6 @@ server:
   error:
     whitelabel:
       enabled: false
-firebase:
-  url: https://dondeestaciono-2350.firebaseio.com
-  json-path: C:\\Users\\josue\\donde_estaciono-firebase.json
 caba:
   urls:
     estacionamientos: /transito/v1/estacionamientos
