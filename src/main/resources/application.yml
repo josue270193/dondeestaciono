@@ -19,16 +19,8 @@ firebase:
   url: https://dondeestaciono-2350.firebaseio.com
   json-path: C:\\Users\\josue\\donde_estaciono-firebase.json
 caba:
-  client-id: ea5817e7b2ea4e12a8215ba1fad5d1aa
-  client-secret: 50E7086F90cF485ebFF1cB2736e9c606
-  url-base-normalizador: http://servicios.usig.buenosaires.gob.ar
-  url-base: https://apitransporte.buenosaires.gob.ar
   urls:
     estacionamientos: /transito/v1/estacionamientos
     normalizador: /normalizar
 twitter:
   debug: true
-  consumerKey: Zo7LTbIxDcZ1mciNxlPqsX5Gm
-  consumerSecret: OtrYquwKdEIXPwSVhfADP8Mt7LW7AW36oWlJ1r1v5lgy5KVMik
-  accessToken: 289598225-HVfdKhJdcbe4OTryp9cNboYW6KL3LqImezYVEeYW
-  accessTokenSecret: Ltccfwgf90cXZsJj5qYYtjtenQ5bF8o3IXKTv2bYd4Kbr
